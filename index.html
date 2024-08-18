@@ -436,13 +436,13 @@
 </section>
 <!-- End of Monitoria Section -->
 <!-- Bolsas Section -->
-<section id="bolsas" class="position-relative section">
+<!--<section id="bolsas" class="position-relative section">
     <div class="container text-center">
         <h6 class="subtitle">Bolsas</h6>
         <h6 class="section-title mb-4">Explore minhas Bolsas</h6>
         <p class="mb-5 pb-4">Confira as diferentes categorias de bolsas que já fiz.</p>
 
-        <!-- Abas para categorias de bolsas -->
+         Abas para categorias de bolsas
         <ul class="nav nav-tabs" id="bolsasTabs" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" id="bolsas-graduacao-tab" data-toggle="tab" href="#bolsas-graduacao" role="tab" aria-controls="bolsas-graduacao" aria-selected="true">Graduação</a>
@@ -452,6 +452,60 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="bolsas-est-tab" data-toggle="tab" href="#bolsas-est" role="tab" aria-controls="bolsas-est" aria-selected="false">Bolsa Estágio</a>
+            </li>
+        </ul>
+
+        <Conteúdo das abas
+        <div class="tab-content" id="bolsasTabsContent">
+             Graduação 
+            <div class="tab-pane fade show active" id="bolsas-graduacao" role="tabpanel" aria-labelledby="bolsas-graduacao-tab">
+                <h5>Bolsas de Graduação</h5>
+                <ul>
+                    <li>PICET3050-2022 - DBAcademic: Conectando os dados públicos e abertos de instituições públicas de ensino. Prof.: Sérgio Sousa Costa.</li>
+                    <li> --- </li>
+                    Adicione mais informações conforme necessário
+                </ul>
+            </div>
+
+            Pós-Graduação
+            <div class="tab-pane fade" id="bolsas-pos" role="tabpanel" aria-labelledby="bolsas-pos-tab">
+                <h5>Bolsas de Pós-Graduação</h5>
+                <ul>
+                    <li>  Mestrado - Andamento </li>
+                    <li>  Doutorado - Andamento </li>
+                     Adicione mais informações conforme necessário
+                </ul>
+            </div>
+             Estágio
+            <div class="tab-pane fade" id="bolsas-est" role="tabpanel" aria-labelledby="bolsas-est-tab">
+                <h5>Bolsa Estágio</h5>
+                <ul>
+                    <li> --- </li>
+                    <li> --- </li>
+                     Adicione mais informações conforme necessário 
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+End of Bolsas Section -->
+<!-- Bolsas Section -->
+<section id="bags" class="position-relative section">
+    <div class="container text-center">
+        <h6 class="subtitle">Bolsas</h6>
+        <h6 class="section-title mb-4">Explore minhas Bolsas</h6>
+        <p class="mb-5 pb-4">Confira as diferentes categorias de bolsas que já fiz.</p>
+
+        <!-- Abas para categorias de bolsas -->
+        <ul class="nav nav-tabs" id="bolsasTabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="bolsas-graduacao-tab" data-toggle="tab" href="#" role="tab" aria-controls="bolsas-graduacao" aria-selected="true" onclick="showTab('bolsas-graduacao')">Graduação</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="bolsas-pos-tab" data-toggle="tab" href="#" role="tab" aria-controls="bolsas-pos" aria-selected="false" onclick="showTab('bolsas-pos')">Pós-Graduação</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="bolsas-est-tab" data-toggle="tab" href="#" role="tab" aria-controls="bolsas-est" aria-selected="false" onclick="showTab('bolsas-est')">Bolsa Estágio</a>
             </li>
         </ul>
 
@@ -489,6 +543,19 @@
     </div>
 </section>
 <!-- End of Bolsas Section -->
+
+<!-- Script para controlar a mudança de abas -->
+<script>
+    function showTab(tabId) {
+        // Remover classe ativa de todas as abas e conteúdo
+        document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+        document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('show', 'active'));
+
+        // Adicionar classe ativa na aba clicada e no conteúdo correspondente
+        document.getElementById(tabId + '-tab').classList.add('active');
+        document.getElementById(tabId).classList.add('show', 'active');
+    }
+</script>
 
 <!-- Projetos Section -->
 <section id="projetos" class="position-relative section">
