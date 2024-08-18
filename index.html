@@ -557,14 +557,14 @@ End of Bolsas Section -->
     }
 </script>
 
-<!-- Projetos Section -->
+<!-- Projetos Section
 <section id="projetos" class="position-relative section">
     <div class="container text-center">
         <h6 class="subtitle">Projetos</h6>
         <h6 class="section-title mb-4">Explore meus Projetos</h6>
         <p class="mb-5 pb-4">Confira os diferentes tipos de projetos realizados na instituição UFMA.</p>
 
-        <!-- Abas para categorias de projetos -->
+        Abas para categorias de projetos
         <ul class="nav nav-tabs" id="projetosTabs" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" id="projetos-extensao-tab" data-toggle="tab" href="#projetos-extensao" role="tab" aria-controls="projetos-extensao" aria-selected="true">Projetos de Extensão</a>
@@ -586,6 +586,98 @@ End of Bolsas Section -->
             </li>
         </ul>
 
+        Conteúdo das abas
+        <div class="tab-content" id="projetosTabsContent">
+            Projetos de Extensão
+            <div class="tab-pane fade show active" id="projetos-extensao" role="tabpanel" aria-labelledby="projetos-extensao-tab">
+                <h5>Projetos de Extensão</h5>
+                <ul>
+                    <li> --- </li>
+                    <li> --- </li>
+                     Adicione mais informações conforme necessário --
+                </ul>
+            </div>
+
+             Projetos de Pesquisa --
+            <div class="tab-pane fade" id="projetos-pesquisa" role="tabpanel" aria-labelledby="projetos-pesquisa-tab">
+                <h5>Projetos de Pesquisa</h5>
+                <ul>
+                    <li> PICET3050-2022 - DBAcademic: Conectando os dados públicos e abertos de instituições públicas de ensino. Prof.: Sérgio Sousa Costa - Ano: 2023.</li>
+                    <li> --- </li>
+                     Adicione mais informações conforme necessário --
+                </ul>
+            </div>
+
+            < TCC 
+            <div class="tab-pane fade" id="projetos-tcc" role="tabpanel" aria-labelledby="projetos-tcc-tab">
+                <h5>Trabalhos de Conclusão de Curso (TCC)</h5>
+                <ul>
+                    <li> Uma proposta de um vocabulário para os dados abertos e conectados das instituições acadêmicas brasileiras (CURSO: BICT 2024.1 - Prof: Sérgio Sousa Costa) - Concluído. </li>
+                    <--<li> --- </li>... AUTOR PRINCIPAL
+                    <-- Adicione mais informações conforme necessário --
+                </ul>
+                <-- Adiciona uma imagem --
+                <div class="tcc-image">
+                   <img src="assets/imgs/andretcc.jpg" alt="Apresentação TCC 2024.1" class="img-fluid">
+               </div>
+            </div>
+            <-- Eventos Recentes --
+            <div class="tab-pane fade" id="eventos" role="tabpanel" aria-labelledby="eventos-tab">
+                <h5>Eventos Recentes</h5>
+                <ul>
+                    <li> III Simpósio React 2023. </li>
+                    <li> ERCEMAPI 2023. </li>
+                    <li> SEMIC & SEMITI 2023. </li> 
+                    <- Adicione mais informações sobre eventos recentes conforme necessário --
+                </ul>
+            </div>
+            <-- Currículo Lattes --
+            <div class="tab-pane fade" id="lattes" role="tabpanel" aria-labelledby="lattes-tab">
+                <h5>Currículo Lattes</h5>
+                <p>Acesse meu Currículo Lattes para obter mais detalhes sobre minha experiência acadêmica e profissional.</p>
+                <-- Adicione um link para o Currículo Lattes --
+                <a href="http://lattes.cnpq.br/7829675817495781" target="_blank" class="btn btn-primary">Ver Currículo Lattes</a>
+            </div>
+            <div class="tab-pane fade" id="publi" role="tabpanel" aria-labelledby="publi-tab">
+                <h5>Minhas publicações</h5>
+                <p>Revisa RSC - Premiação ERCEMAPI 2023 - Andamento.</p>
+               
+               
+            </div>
+        </div>
+    </div>
+</section>
+
+<-- End of Projetos Section -->
+<!-- Projetos Section -->
+<section id="projetos" class="position-relative section">
+    <div class="container text-center">
+        <h6 class="subtitle">Projetos</h6>
+        <h6 class="section-title mb-4">Explore meus Projetos</h6>
+        <p class="mb-5 pb-4">Confira os diferentes tipos de projetos realizados na instituição UFMA.</p>
+
+        <!-- Abas para categorias de projetos -->
+        <ul class="nav nav-tabs" id="projetosTabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="projetos-extensao-tab" data-toggle="tab" href="#" role="tab" aria-controls="projetos-extensao" aria-selected="true" onclick="showTab('projetos-extensao')">Projetos de Extensão</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="projetos-pesquisa-tab" data-toggle="tab" href="#" role="tab" aria-controls="projetos-pesquisa" aria-selected="false" onclick="showTab('projetos-pesquisa')">Projetos de Pesquisa</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="projetos-tcc-tab" data-toggle="tab" href="#" role="tab" aria-controls="projetos-tcc" aria-selected="false" onclick="showTab('projetos-tcc')">TCC</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="eventos-tab" data-toggle="tab" href="#" role="tab" aria-controls="eventos" aria-selected="false" onclick="showTab('eventos')">Eventos Recentes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="lattes-tab" data-toggle="tab" href="#" role="tab" aria-controls="lattes" aria-selected="false" onclick="showTab('lattes')">Currículo Lattes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="publi-tab" data-toggle="tab" href="#" role="tab" aria-controls="publi" aria-selected="false" onclick="showTab('publi')">Publicações</a>
+            </li>
+        </ul>
+
         <!-- Conteúdo das abas -->
         <div class="tab-content" id="projetosTabsContent">
             <!-- Projetos de Extensão -->
@@ -602,7 +694,7 @@ End of Bolsas Section -->
             <div class="tab-pane fade" id="projetos-pesquisa" role="tabpanel" aria-labelledby="projetos-pesquisa-tab">
                 <h5>Projetos de Pesquisa</h5>
                 <ul>
-                    <li> PICET3050-2022 - DBAcademic: Conectando os dados públicos e abertos de instituições públicas de ensino. Prof.: Sérgio Sousa Costa - Ano: 2023.</li>
+                    <li>PICET3050-2022 - DBAcademic: Conectando os dados públicos e abertos de instituições públicas de ensino. Prof.: Sérgio Sousa Costa - Ano: 2023.</li>
                     <li> --- </li>
                     <!-- Adicione mais informações conforme necessário -->
                 </ul>
@@ -612,8 +704,8 @@ End of Bolsas Section -->
             <div class="tab-pane fade" id="projetos-tcc" role="tabpanel" aria-labelledby="projetos-tcc-tab">
                 <h5>Trabalhos de Conclusão de Curso (TCC)</h5>
                 <ul>
-                    <li> Uma proposta de um vocabulário para os dados abertos e conectados das instituições acadêmicas brasileiras (CURSO: BICT 2024.1 - Prof: Sérgio Sousa Costa) - Concluído. </li>
-                    <!--<li> --- </li>... AUTOR PRINCIPAL-->
+                    <li>Uma proposta de um vocabulário para os dados abertos e conectados das instituições acadêmicas brasileiras (CURSO: BICT 2024.1 - Prof: Sérgio Sousa Costa) - Concluído.</li>
+                    <!-- <li> --- </li>... AUTOR PRINCIPAL -->
                     <!-- Adicione mais informações conforme necessário -->
                 </ul>
                 <!-- Adiciona uma imagem -->
@@ -621,16 +713,18 @@ End of Bolsas Section -->
                    <img src="assets/imgs/andretcc.jpg" alt="Apresentação TCC 2024.1" class="img-fluid">
                </div>
             </div>
+
             <!-- Eventos Recentes -->
             <div class="tab-pane fade" id="eventos" role="tabpanel" aria-labelledby="eventos-tab">
                 <h5>Eventos Recentes</h5>
                 <ul>
-                    <li> III Simpósio React 2023. </li>
-                    <li> ERCEMAPI 2023. </li>
-                    <li> SEMIC & SEMITI 2023. </li> 
+                    <li>III Simpósio React 2023.</li>
+                    <li>ERCEMAPI 2023.</li>
+                    <li>SEMIC & SEMITI 2023.</li> 
                     <!-- Adicione mais informações sobre eventos recentes conforme necessário -->
                 </ul>
             </div>
+
             <!-- Currículo Lattes -->
             <div class="tab-pane fade" id="lattes" role="tabpanel" aria-labelledby="lattes-tab">
                 <h5>Currículo Lattes</h5>
@@ -638,17 +732,30 @@ End of Bolsas Section -->
                 <!-- Adicione um link para o Currículo Lattes -->
                 <a href="http://lattes.cnpq.br/7829675817495781" target="_blank" class="btn btn-primary">Ver Currículo Lattes</a>
             </div>
+
+            <!-- Publicações -->
             <div class="tab-pane fade" id="publi" role="tabpanel" aria-labelledby="publi-tab">
                 <h5>Minhas publicações</h5>
                 <p>Revisa RSC - Premiação ERCEMAPI 2023 - Andamento.</p>
-               
-               
             </div>
         </div>
     </div>
 </section>
 
 <!-- End of Projetos Section -->
+
+<!-- Script para controlar a mudança de abas -->
+<script>
+    function showTab(tabId) {
+        // Remover classe ativa de todas as abas e conteúdo
+        document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+        document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('show', 'active'));
+
+        // Adicionar classe ativa na aba clicada e no conteúdo correspondente
+        document.getElementById(tabId + '-tab').classList.add('active');
+        document.getElementById(tabId).classList.add('show', 'active');
+    }
+</script>
 
     <!-- Blog Section -->
     <section id="blog" class="section">
@@ -833,7 +940,7 @@ End of Bolsas Section -->
             <div class="row align-items-center">
                 <div class="col-sm-6">
                     <p>Copyright <script>document.write(new Date().getFullYear())</script> &copy; <a href="http://www.devcrud.com" target="_blank">DevCRUD</a></p>
-                    <p>Todos os direitos reservados versão 5.2.36.1</p>
+                    <p>Todos os direitos reservados versão 5.2.36.7</p>
                 </div>
                 <div class="col-sm-6">
                     <div class="socials">
