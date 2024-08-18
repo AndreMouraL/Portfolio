@@ -81,8 +81,13 @@
 
                 <div class="buttons pt-3">
                     <button class="btn btn-primary rounded">Me Contrate</button>
-                    <button  id="downloadCVBtn" class="btn btn-dark rounded">DOWNLOAD CV</button>
-                </div>      
+                    <button  id="downloadCVBtn1" class="btn btn-dark rounded">DOWNLOAD CV</button>
+                </div>   
+                <script>
+                    document.getElementById("downloadCVBtn1").addEventListener("click", function() {
+                        alert("Você só pode fazer o download mediante a autorização do administrador. Sugiro que fale com o mesmo em 'Fale comigo!'.");
+                    });
+                </script>   
 
                 <div class="socials mt-4">
                     <a class="social-item" href="javascript:void(0)"><i class="ti-facebook"></i></a>
