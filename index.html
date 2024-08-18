@@ -134,12 +134,17 @@
                             <source src="assets/video/Apresentação.mp4" type="video/mp4">
                         </video>
                     </div>
-                    <button class="btn btn-primary rounded mt-3">DOWNLOAD CV</button> 
+                    <button id="downloadCVBtn" class="btn btn-primary rounded mt-3">DOWNLOAD CV</button> 
                     <a href="https://www.youtube.com/watch?v=6jtOBIICfJc" target="_blank" class="btn btn-primary rounded mt-3">TOUR PELA UFMA</a>                  
                 </div>
             </div>
         </div>
     </section>
+    <script>
+        document.getElementById("downloadCVBtn").addEventListener("click", function() {
+            alert("Você só pode fazer o download mediante a autorização do administrador. Sugiro que fale com o mesmo em 'Fale comigo!'.");
+        });
+    </script>
 
     <!-- Service section -->
     <section id="servicos" class="section">
