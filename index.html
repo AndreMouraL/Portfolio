@@ -784,24 +784,41 @@ End of Bolsas Section -->
 
             <!-- Publicações -->
             <div class="tab-pane fade" id="publi" role="tabpanel" aria-labelledby="publi-tab">
-                <h5>Minhas publicações</h5>
-                <h5>Revistas:</h5>
-                <p>Revista RSC - Premiação ERCEMAPI 2023 - Andamento.</p>
-                <h5>Anais de Eventos:</h5>
-                <li>Conferências (3).</li>
-                <li>Congressos (5).</li>
-                <li>Simpósios (1).</li>
-                <li>Workshops (0).</li>
-                <li>Encontro (100).</li>
-                <li>Seminários (3).</li>
-                <h5>Escolas Regionais:</h5>
-                <li>ERCEMAPI (1).</li>
-                <h5>Periódicos e Artigos:</h5>
-                <li>---</li>
-                <h5>Livros:</h5>
-                <li>---</li>
-
+                <h5 class="centralizado">Minhas publicações</h5>
+                <h5 class="centralizado">Revistas:</h5>
+                <p class="justificado">Revista RSC - Premiação ERCEMAPI 2023 - Andamento.</p>
+                <h5 class="centralizado">Anais de Eventos:</h5>
+                <ul class="justificado">
+                    <li>Conferências (3).</li>
+                    <li>Congressos (5).</li>
+                    <li>Simpósios (1).</li>
+                    <li>Workshops (0).</li>
+                    <li>Encontro (100).</li>
+                    <li>Seminários (3).</li>
+                </ul>
+                <h5 class="centralizado">Escolas Regionais:</h5>
+                <ul class="justificado">
+                    <li>ERCEMAPI (1).</li>
+                </ul>
+                <h5 class="centralizado">Periódicos e Artigos:</h5>
+                <ul class="justificado">
+                    <li>---</li>
+                </ul>
+                <h5 class="centralizado">Livros:</h5>
+                <ul class="justificado">
+                    <li>---</li>
+                </ul>
             </div>
+            
+            <style>
+                .justificado {
+                    text-align: justify;
+                }
+                .centralizado {
+                    text-align: center;
+                }
+            </style>
+            
             <!-- Concursos -->
             <div class="tab-pane fade" id="concurso" role="tabpanel" aria-labelledby="concurso-tab">
                 <h5>Meus concursos</h5>
@@ -810,9 +827,16 @@ End of Bolsas Section -->
             <!-- Artigos-->
             <div class="tab-pane fade" id="artigo" role="tabpanel" aria-labelledby="artigo-tab">
                 <h5>Meus Artigos</h5>
-                <p>1- Uma proposta de um vocabulário para os dados abertos e conectados das instituições acadêmicas brasileiras.  DOI:https://doi.org/10.5753/ercemapi.2023
-                <p>2- UMA ABORDAGEM BASEADA EM ENGENHARIA DE DADOS PARA EXTRAÇÃO, TRANSFORMAÇÃO E CARREGAMENTO DE DADOS DE INSTITUIÇÕES ACADÊMICAS. DOI: 10.29327/Simposioreact2023.678111/  ISBN: 978-85-5722-947-1</p>
+                <p class="justificado">1- Uma proposta de um vocabulário para os dados abertos e conectados das instituições acadêmicas brasileiras. DOI: <a href="https://doi.org/10.5753/ercemapi.2023" target="_blank">https://doi.org/10.5753/ercemapi.2023</a></p>
+                <p class="justificado">2- UMA ABORDAGEM BASEADA EM ENGENHARIA DE DADOS PARA EXTRAÇÃO, TRANSFORMAÇÃO E CARREGAMENTO DE DADOS DE INSTITUIÇÕES ACADÊMICAS. DOI: <a href="https://doi.org/10.29327/Simposioreact2023.678111" target="_blank">10.29327/Simposioreact2023.678111</a> ISBN: 978-85-5722-947-1</p>
             </div>
+            
+            <style>
+                .justificado {
+                    text-align: justify;
+                }
+            </style>
+            
             <!-- Relatórios -->
             <div class="tab-pane fade" id="relat" role="tabpanel" aria-labelledby="relat-tab">
                 <h5>Meus relatórios</h5>
@@ -820,11 +844,26 @@ End of Bolsas Section -->
             </div>
              <!-- softwares -->
              <div class="tab-pane fade" id="soft" role="tabpanel" aria-labelledby="soft-tab">
-                <h5>Meus  sotfwares</h5>
-                <p>1- Bem&Brasa.</p>
-                <p>2- Imobile on.</p>
-                <p>3- UP! pro-bono.</p>
+                <h5>Meus softwares</h5>
+                <div class="software-list">
+                    <p>1- Bem&Brasa 
+                        <a class="social-item" href="https://github.com/AndreMouraL/BemeBrasaDemo">
+                            <i class="ti-github"></i>
+                        </a>
+                    </p>
+                    <p>2- Imobile on 
+                        <a class="social-item" href="https://github.com/AndreMouraL/IMOBILLE-ON">
+                            <i class="ti-github"></i>
+                        </a>
+                    </p>
+                    <p>3- UP! pro-bono 
+                        <a class="social-item" href="https://github.com/AndreMouraL/UPProBono">
+                            <i class="ti-github"></i>
+                        </a>
+                    </p>
+                </div>
             </div>
+            
             <!-- hardware -->
             <div class="tab-pane fade" id="hard" role="tabpanel" aria-labelledby="hard-tab">
                 <h5>Meus  hardwares</h5>

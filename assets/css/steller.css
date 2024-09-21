@@ -11644,3 +11644,21 @@ pre {
 .section.bg-gray {
   background: white;
 }
+#soft {
+  text-align: justify;
+}
+
+.software-list p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.social-item {
+  text-align: center;
+  margin-left: 10px; /* Espaçamento opcional entre o texto e o ícone */
+}
+
+.ti-github {
+  font-size: 20px; /* Tamanho opcional do ícone */
+}
