@@ -23,6 +23,16 @@
     <style>
         #mapaMaranhao { height: 500px; width: 100%; margin-top: 20px; }
         .grafico-container { width: 80%; margin: auto; }
+        #pdfContainer {
+            display: none;
+            margin-top: 30px;
+            text-align: center;
+        }
+        #pdfContainer iframe {
+            width: 80%;
+            height: 600px;
+            border: none;
+        }
     </style>
 </head>
 <body>
@@ -65,6 +75,12 @@
         <div class="card p-3 shadow mt-4">
             <div id="mapaMaranhao"></div>
         </div>
+    </div>
+
+    <!-- Container para o PDF -->
+    <div id="pdfContainer">
+        <h2>PDF de Análise de Dados</h2>
+        <embed src="assets/pdf/Relatorio_de_Analise_de_dados_Maranhao_Andre_Moura_Lima_Desafio_2_trilhas_2B.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" width="80%" height="600px" />
     </div>
 
     <script>
@@ -149,6 +165,17 @@
         });
 
         atualizarMapa(0);
+
+        // Detecta o scroll da página para mostrar o PDF
+        window.addEventListener('scroll', function() {
+            let pdfContainer = document.getElementById('pdfContainer');
+            let scrollPosition = window.scrollY + window.innerHeight;
+            let documentHeight = document.documentElement.scrollHeight;
+
+            if (scrollPosition >= documentHeight - 500) {
+                pdfContainer.style.display = 'block'; // Mostra o PDF quando o final da página for atingido
+            }
+        });
     </script>
 </body>
 </html>
