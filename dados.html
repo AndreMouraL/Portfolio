@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Site de Portfólio de André Moura.">
+    <meta name="author" content="André Moura">
+    <title>André Moura | Portfólio</title>
+    <link rel="icon" type="image/png" href="assets/imgs/folha1.png">
+    
+    <!-- Chart.js para gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Leaflet.js para mapas -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <!-- Ícones Themify -->
+    <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
+    <!-- Estilos do Steller -->
+    <link rel="stylesheet" href="assets/css/steller.css">
+
+    <style>
+        #mapaMaranhao { height: 500px; width: 100%; margin-top: 20px; }
+        .grafico-container { width: 80%; margin: auto; }
+    </style>
+</head>
+<body>
+    <div class="container text-center mt-5">
+        <h2 class="mb-3 text-primary">Desafio 2 - Gráficos de Dados Econômicos (2010-2024)</h2>
+        <p class="text-muted">
+            Esses gráficos estimam os dados econômicos e demográficos do Estado do Maranhão (SECTI 2B trilhas 2B).
+        </p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card p-3 shadow">
+                <canvas id="graficoPopulacao"></canvas>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3 shadow">
+                <canvas id="graficoPIB"></canvas>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3 shadow">
+                <canvas id="graficoRenda"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <h2 class="text-center">Mapa do Maranhão - Estatísticas Econômicas</h2>
+        <p class="text-muted text-center">
+            O mapa não mostra todas as cidades do Maranhão porque atualmente ele só está plotando três cidades (São Luís, Imperatriz e Caxias) nessa análise, mas os dados valem para todas as cidades do estado.
+        </p>
+
+        <div class="mt-3">
+            <label for="anoSelecionado" class="form-label">Selecione o Ano:</label>
+            <select id="anoSelecionado" class="form-select w-50 mx-auto"></select>
+        </div>
+        
+        <div class="card p-3 shadow mt-4">
+            <div id="mapaMaranhao"></div>
+        </div>
+    </div>
+
+    <script>
+        let anos = [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+        let populacao = [6574789, 6651000, 6727000, 6803000, 6850884, 6904241, 6954036, 7001161, 7045055, 7087262, 7130000, 7153262, 6775152, 6776699, 7010960];
+        let pib = [52.10, 52.20, 58.80, 68.50, 76.84, 78.48, 85.31, 89.54, 98.18, 97.34, 106.92, 124.98, 130.00, 135.00, 140.00];
+        let rendaPerCapita = [660, 665, 682, 680, 690, 692, 694, 701.50, 709, 754, 814, 814, 814, 969, 969];
+
+        function criarGrafico(id, titulo, labels, dados, label, cor) {
+            new Chart(document.getElementById(id), {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: label,
+                        data: dados,
+                        borderColor: cor,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: { display: true, text: titulo }
+                    },
+                    scales: {
+                        x: { title: { display: true, text: 'Ano' } },
+                        y: { title: { display: true, text: label } }
+                    }
+                }
+            });
+        }
+
+        criarGrafico("graficoPopulacao", "População Estimada", anos, populacao, "População", "blue");
+        criarGrafico("graficoPIB", "PIB Estimado (R$ Bilhões)", anos, pib, "PIB", "green");
+        criarGrafico("graficoRenda", "Renda Per Capita", anos, rendaPerCapita, "Renda Per Capita", "red");
+
+        let mapa = L.map('mapaMaranhao').setView([-4.9609, -45.2744], 6);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mapa);
+
+        let dadosMaranhao = {
+            "São Luís": { lat: -2.5, lng: -44.3 },
+            "Imperatriz": { lat: -5.5, lng: -47.5 },
+            "Caxias": { lat: -4.8, lng: -43.3 }
+        };
+
+        function atualizarMapa(anoIndex) {
+            mapa.eachLayer(layer => { if (layer instanceof L.CircleMarker) mapa.removeLayer(layer); });
+
+            for (let cidade in dadosMaranhao) {
+                let { lat, lng } = dadosMaranhao[cidade];
+                let pop = populacao[anoIndex];
+                let pibAno = pib[anoIndex];
+                let renda = rendaPerCapita[anoIndex];
+
+                let popupContent = `<b>${cidade}</b><br>
+                                    População: ${pop.toLocaleString()}<br>
+                                    PIB: R$ ${pibAno} bilhões<br>
+                                    Renda Per Capita: R$ ${renda}`;
+
+                L.circleMarker([lat, lng], {
+                    radius: 10,
+                    fillColor: "#FF5733",
+                    color: "#000",
+                    weight: 1,
+                    opacity: 1,
+                    fillOpacity: 0.8
+                }).bindPopup(popupContent).addTo(mapa);
+            }
+        }
+
+        let selectAno = document.getElementById("anoSelecionado");
+        anos.forEach((ano, index) => {
+            let option = document.createElement("option");
+            option.value = index;
+            option.text = ano;
+            selectAno.appendChild(option);
+        });
+
+        selectAno.addEventListener("change", function() {
+            atualizarMapa(this.value);
+        });
+
+        atualizarMapa(0);
+    </script>
+</body>
+</html>
