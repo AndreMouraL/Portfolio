@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronograma no Estilo JIRA</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f5f7;
+            color: #172b4d;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #dfe1e6;
+        }
+        
+        h1 {
+            margin: 0;
+            color: #0052cc;
+        }
+        
+        .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .search-bar input {
+            padding: 8px 12px;
+            border: 1px solid #dfe1e6;
+            border-radius: 3px;
+            width: 250px;
+        }
+        
+        .board {
+            background-color: white;
+            border-radius: 3px;
+            box-shadow: 0 1px 3px rgba(9, 30, 66, 0.15);
+            overflow: hidden;
+        }
+        
+        .board-header {
+            display: flex;
+            background-color: #f4f5f7;
+            padding: 10px 15px;
+            border-bottom: 1px solid #dfe1e6;
+        }
+        
+        .board-header-item {
+            flex: 1;
+            font-weight: 600;
+            color: #5e6c84;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+        
+        .board-content {
+            display: flex;
+            min-height: 500px;
+        }
+        
+        .board-column {
+            flex: 1;
+            padding: 10px;
+            border-right: 1px solid #dfe1e6;
+        }
+        
+        .board-column:last-child {
+            border-right: none;
+        }
+        
+        .board-column-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .board-column-count {
+            background-color: #ebecf0;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        
+        .task-card {
+            background-color: white;
+            border-radius: 3px;
+            box-shadow: 0 1px 1px rgba(9, 30, 66, 0.25);
+            padding: 10px;
+            margin-bottom: 10px;
+            border-left: 3px solid #0052cc;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        
+        .task-card:hover {
+            background-color: #f4f5f7;
+        }
+        
+        .task-card h3 {
+            margin: 0 0 5px 0;
+            font-size: 14px;
+            color: #172b4d;
+        }
+        
+        .task-card p {
+            margin: 0;
+            font-size: 12px;
+            color: #5e6c84;
+        }
+        
+        .task-card-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 12px;
+        }
+        
+        .task-card-type {
+            background-color: #dfe1e6;
+            padding: 2px 5px;
+            border-radius: 3px;
+            color: #5e6c84;
+        }
+        
+        .task-card-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: #0052cc;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+        
+        .add-task {
+            color: #5e6c84;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 3px;
+        }
+        
+        .add-task:hover {
+            background-color: #ebecf0;
+        }
+        
+        .add-task i {
+            margin-right: 5px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 3px;
+            width: 500px;
+            max-width: 90%;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-header h2 {
+            margin: 0;
+            color: #172b4d;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #5e6c84;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #5e6c84;
+            font-size: 14px;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #dfe1e6;
+            border-radius: 3px;
+        }
+        
+        .form-group textarea {
+            min-height: 80px;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .btn-primary {
+            background-color: #0052cc;
+            color: white;
+            border: none;
+        }
+        
+        .btn-secondary {
+            background-color: #ebecf0;
+            color: #172b4d;
+            border: none;
+            margin-right: 10px;
+        }
+        
+        .delete-task {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: none;
+            border: none;
+            color: #ff5630;
+            font-size: 12px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        
+        .task-card:hover .delete-task {
+            opacity: 1;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .save-actions {
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        
+        .btn-save {
+            background-color: #36b37e;
+            color: white;
+        }
+        
+        .btn-load {
+            background-color: #6554c0;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Cronograma de Projeto</h1>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Pesquisar tarefas...">
+                <button class="btn btn-save" onclick="saveBoard()">Salvar</button>
+                <button class="btn btn-load" onclick="loadBoard()">Carregar</button>
+            </div>
+        </header>
+        
+        <div class="board" id="kanban-board">
+            <div class="board-header">
+                <div class="board-header-item">A Fazer</div>
+                <div class="board-header-item">Em Progresso</div>
+                <div class="board-header-item">Em Revisão</div>
+                <div class="board-header-item">Concluído</div>
+            </div>
+            
+            <div class="board-content">
+                <div class="board-column" id="todo">
+                    <div class="board-column-title">
+                        <span>A Fazer</span>
+                        <span class="board-column-count">3</span>
+                    </div>
+                    
+                    <div class="task-card" draggable="true">
+                        <button class="delete-task" onclick="deleteTask(this)">×</button>
+                        <h3>Criar página inicial</h3>
+                        <p>Desenvolver o layout da página inicial com todos os componentes</p>
+                        <div class="task-card-footer">
+                            <span class="task-card-type">Tarefa</span>
+                            <div class="task-card-avatar">JS</div>
+                        </div>
+                    </div>
+                    
+                    <div class="task-card" draggable="true">
+                        <button class="delete-task" onclick="deleteTask(this)">×</button>
+                        <h3>Configurar API</h3>
+                        <p>Configurar endpoints da API para integração com frontend</p>
+                        <div class="task-card-footer">
+                            <span class="task-card-type">Tarefa</span>
+                            <div class="task-card-avatar">TM</div>
+                        </div>
+                    </div>
+                    
+                    <div class="task-card" draggable="true">
+                        <button class="delete-task" onclick="deleteTask(this)">×</button>
+                        <h3>Reunião de planejamento</h3>
+                        <p>Definir escopo do próximo sprint com a equipe</p>
+                        <div class="task-card-footer">
+                            <span class="task-card-type">Reunião</span>
+                            <div class="task-card-avatar">AR</div>
+                        </div>
+                    </div>
+                    
+                    <div class="add-task" onclick="openModal('todo')">
+                        <i>+</i> Adicionar tarefa
+                    </div>
+                </div>
+                
+                <div class="board-column" id="in-progress">
+                    <div class="board-column-title">
+                        <span>Em Progresso</span>
+                        <span class="board-column-count">2</span>
+                    </div>
+                    
+                    <div class="task-card" draggable="true">
+                        <button class="delete-task" onclick="deleteTask(this)">×</button>
+                        <h3>Implementar autenticação</h3>
+                        <p>Desenvolver sistema de login e registro de usuários</p>
+                        <div class="task-card-footer">
+                            <span class="task-card-type">Tarefa</span>
+                            <div class="task-card-avatar">PD</div>
+                        </div>
+                    </div>
+                    
+                    <div class="task-card" draggable="true">
+                        <button class="delete-task" onclick="deleteTask(this)">×</button>
+                        <h3>Testes unitários</h3>
+                        <p>Escrever testes para módulo de pagamentos</p>
+                        <div class="task-card-footer">
+                            <span class="task-card-type">Tarefa</span>
+                            <div class="task-card-avatar">JS</div>
+                        </div>
+                    </div>
+                    
+                    <div class="add-task" onclick="openModal('in-progress')">
+                        <i>+</i> Adicionar tarefa
+                    </div>
+                </div>
+                
+                <div class="board-column" id="in-review">
+                    <div class="board-column-title">
+                        <span>Em Revisão</span>
+                        <span class="board-column-count">1</span>
+                    </div>
+                    
+                    <div class="task-card" draggable="true">
+                        <button class="delete-task" onclick="deleteTask(this)">×</button>
+                        <h3>Refatorar código CSS</h3>
+                        <p>Revisar e melhorar a estrutura CSS do projeto</p>
+                        <div class="task-card-footer">
+                            <span class="task-card-type">Tarefa</span>
+                            <div class="task-card-avatar">TM</div>
+                        </div>
+                    </div>
+                    
+                    <div class="add-task" onclick="openModal('in-review')">
+                        <i>+</i> Adicionar tarefa
+                    </div>
+                </div>
+                
+                <div class="board-column" id="done">
+                    <div class="board-column-title">
+                        <span>Concluído</span>
+                        <span class="board-column-count">2</span>
+                    </div>
+                    
+                    <div class="task-card" draggable="true">
+                        <button class="delete-task" onclick="deleteTask(this)">×</button>
+                        <h3>Documentação do projeto</h3>
+                        <p>Escrever documentação técnica para desenvolvedores</p>
+                        <div class="task-card-footer">
+                            <span class="task-card-type">Documentação</span>
+                            <div class="task-card-avatar">AR</div>
+                        </div>
+                    </div>
+                    
+                    <div class="task-card" draggable="true">
+                        <button class="delete-task" onclick="deleteTask(this)">×</button>
+                        <h3>Configurar ambiente</h3>
+                        <p>Preparar ambiente de desenvolvimento para a equipe</p>
+                        <div class="task-card-footer">
+                            <span class="task-card-type">Tarefa</span>
+                            <div class="task-card-avatar">PD</div>
+                        </div>
+                    </div>
+                    
+                    <div class="add-task" onclick="openModal('done')">
+                        <i>+</i> Adicionar tarefa
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="save-actions">
+            <button class="btn btn-save" onclick="saveBoard()">Salvar Cronograma</button>
+            <button class="btn btn-load" onclick="loadBoard()">Carregar Cronograma</button>
+        </div>
+    </div>
+    
+    <div class="modal" id="task-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Adicionar Nova Tarefa</h2>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+            </div>
+            
+            <form id="task-form">
+                <input type="hidden" id="task-column">
+                
+                <div class="form-group">
+                    <label for="task-title">Título</label>
+                    <input type="text" id="task-title" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="task-description">Descrição</label>
+                    <textarea id="task-description"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="task-type">Tipo</label>
+                    <select id="task-type">
+                        <option value="Tarefa">Tarefa</option>
+                        <option value="Bug">Bug</option>
+                        <option value="Melhoria">Melhoria</option>
+                        <option value="Reunião">Reunião</option>
+                        <option value="Documentação">Documentação</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="task-assignee">Responsável</label>
+                    <select id="task-assignee">
+                        <option value="JS">Denis</option>
+                        <option value="TM">Andre Moura</option>
+                        <option value="PD">Victor Coelho</option>
+                        <option value="AR">Marcio</option>
+                        <option value="AR">Anderson</option>
+                    </select>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Adicionar Tarefa</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // Funções para abrir e fechar o modal
+        function openModal(columnId) {
+            document.getElementById('task-modal').style.display = 'flex';
+            document.getElementById('task-column').value = columnId;
+        }
+        
+        function closeModal() {
+            document.getElementById('task-modal').style.display = 'none';
+            document.getElementById('task-form').reset();
+        }
+        
+        // Adicionar nova tarefa
+        document.getElementById('task-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const columnId = document.getElementById('task-column').value;
+            const title = document.getElementById('task-title').value;
+            const description = document.getElementById('task-description').value;
+            const type = document.getElementById('task-type').value;
+            const assignee = document.getElementById('task-assignee').value;
+            const assigneeName = document.getElementById('task-assignee').options[document.getElementById('task-assignee').selectedIndex].text;
+            
+            // Criar novo cartão de tarefa
+            const taskCard = document.createElement('div');
+            taskCard.className = 'task-card';
+            taskCard.draggable = true;
+            taskCard.innerHTML = `
+                <button class="delete-task" onclick="deleteTask(this)">×</button>
+                <h3>${title}</h3>
+                <p>${description}</p>
+                <div class="task-card-footer">
+                    <span class="task-card-type">${type}</span>
+                    <div class="task-card-avatar" title="${assigneeName}">${assignee}</div>
+                </div>
+            `;
+            
+            // Adicionar o cartão à coluna apropriada (antes do botão "Adicionar tarefa")
+            const column = document.getElementById(columnId);
+            const addTaskButton = column.querySelector('.add-task');
+            column.insertBefore(taskCard, addTaskButton);
+            
+            // Atualizar contador da coluna
+            updateColumnCount(columnId);
+            
+            // Fechar o modal e resetar o formulário
+            closeModal();
+            
+            // Adicionar eventos de arrastar para o novo cartão
+            setupDragEvents(taskCard);
+        });
+        
+        // Função para deletar tarefa
+        function deleteTask(button) {
+            const taskCard = button.closest('.task-card');
+            const column = taskCard.closest('.board-column');
+            
+            // Remover a tarefa
+            taskCard.remove();
+            
+            // Atualizar contador da coluna
+            updateColumnCount(column.id);
+        }
+        
+        // Atualizar contador de tarefas em uma coluna
+        function updateColumnCount(columnId) {
+            const column = document.getElementById(columnId);
+            const count = column.querySelectorAll('.task-card').length;
+            column.querySelector('.board-column-count').textContent = count;
+        }
+        
+        // Configurar eventos de arrastar para todos os cartões
+        function setupDragEvents(card) {
+            card.addEventListener('dragstart', dragStart);
+            card.addEventListener('dragend', dragEnd);
+        }
+        
+        // Eventos de drag and drop
+        function dragStart() {
+            this.classList.add('dragging');
+            setTimeout(() => this.style.display = 'none', 0);
+        }
+        
+        function dragEnd() {
+            this.classList.remove('dragging');
+            this.style.display = 'block';
+        }
+        
+        // Configurar colunas como zonas de drop
+        document.querySelectorAll('.board-column').forEach(column => {
+            column.addEventListener('dragover', dragOver);
+            column.addEventListener('dragenter', dragEnter);
+            column.addEventListener('dragleave', dragLeave);
+            column.addEventListener('drop', drop);
+            
+            // Configurar eventos de arrastar para os cartões existentes
+            column.querySelectorAll('.task-card').forEach(card => {
+                setupDragEvents(card);
+            });
+        });
+        
+        function dragOver(e) {
+            e.preventDefault();
+        }
+        
+        function dragEnter(e) {
+            e.preventDefault();
+            this.style.backgroundColor = '#ebecf0';
+        }
+        
+        function dragLeave() {
+            this.style.backgroundColor = 'white';
+        }
+        
+        function drop() {
+            this.style.backgroundColor = 'white';
+            const card = document.querySelector('.dragging');
+            if (card) {
+                const addTaskButton = this.querySelector('.add-task');
+                this.insertBefore(card, addTaskButton);
+                
+                // Atualizar contadores nas colunas de origem e destino
+                document.querySelectorAll('.board-column').forEach(col => {
+                    updateColumnCount(col.id);
+                });
+            }
+        }
+        
+        // Função de pesquisa
+        document.getElementById('search-input').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            
+            document.querySelectorAll('.task-card').forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const description = card.querySelector('p').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        });
+        
+        // Função para salvar o estado do quadro
+        function saveBoard() {
+            const boardState = {
+                columns: {}
+            };
+            
+            // Coletar dados de cada coluna
+            document.querySelectorAll('.board-column').forEach(column => {
+                const columnId = column.id;
+                const tasks = [];
+                
+                column.querySelectorAll('.task-card').forEach(task => {
+                    tasks.push({
+                        title: task.querySelector('h3').textContent,
+                        description: task.querySelector('p').textContent,
+                        type: task.querySelector('.task-card-type').textContent,
+                        assignee: task.querySelector('.task-card-avatar').textContent,
+                        assigneeName: task.querySelector('.task-card-avatar').getAttribute('title') || ''
+                    });
+                });
+                
+                boardState.columns[columnId] = tasks;
+            });
+            
+            // Salvar no localStorage
+            localStorage.setItem('kanbanBoard', JSON.stringify(boardState));
+            alert('Cronograma salvo com sucesso!');
+        }
+        
+        // Função para carregar o estado do quadro
+        function loadBoard() {
+            const savedBoard = localStorage.getItem('kanbanBoard');
+            if (!savedBoard) {
+                alert('Nenhum cronograma salvo encontrado.');
+                return;
+            }
+            
+            if (confirm('Isso substituirá o quadro atual. Deseja continuar?')) {
+                const boardState = JSON.parse(savedBoard);
+                
+                // Limpar todas as colunas (exceto o botão de adicionar tarefa)
+                document.querySelectorAll('.board-column').forEach(column => {
+                    const addTaskButton = column.querySelector('.add-task');
+                    column.innerHTML = '';
+                    column.appendChild(column.querySelector('.board-column-title'));
+                    column.appendChild(addTaskButton);
+                });
+                
+                // Recriar as tarefas em suas colunas
+                for (const columnId in boardState.columns) {
+                    const column = document.getElementById(columnId);
+                    const addTaskButton = column.querySelector('.add-task');
+                    
+                    boardState.columns[columnId].forEach(task => {
+                        const taskCard = document.createElement('div');
+                        taskCard.className = 'task-card';
+                        taskCard.draggable = true;
+                        taskCard.innerHTML = `
+                            <button class="delete-task" onclick="deleteTask(this)">×</button>
+                            <h3>${task.title}</h3>
+                            <p>${task.description}</p>
+                            <div class="task-card-footer">
+                                <span class="task-card-type">${task.type}</span>
+                                <div class="task-card-avatar" title="${task.assigneeName}">${task.assignee}</div>
+                            </div>
+                        `;
+                        
+                        column.insertBefore(taskCard, addTaskButton);
+                        setupDragEvents(taskCard);
+                    });
+                    
+                    updateColumnCount(columnId);
+                }
+                
+                alert('Cronograma carregado com sucesso!');
+            }
+        }
+        
+        // Inicializar contadores
+        document.querySelectorAll('.board-column').forEach(column => {
+            updateColumnCount(column.id);
+        });
+    </script>
+</body>
+</html>
