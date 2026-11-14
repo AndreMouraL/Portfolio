@@ -56,3 +56,5 @@ Configuração necessária uma única vez: **Settings → Pages → Source: GitH
 ## Licença e uso
 
 O código pode servir de referência para estudo. Textos, fotos, depoimentos e demais dados pessoais pertencem a André Moura e não devem ser reutilizados sem autorização.
+
+<img width="1897" height="907" alt="image" src="https://github.com/user-attachments/assets/415ae199-4b3c-4508-be52-8286df8f1e37" />
