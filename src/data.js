@@ -1,6 +1,6 @@
 export const me = {
   name: 'André Moura', roles: ['Cientista de Dados', 'Engenheiro de Dados', 'Engenharia da Computação · UFMA'],
-  email: 'andremoura0995@gmail.com', linkedin: 'https://www.linkedin.com/in/andr%C3%A9-lima-6817a9211/', instagram: '', // TODO: cole aqui os links do LinkedIn e do Instagram
+  email: 'andremoura0995@gmail.com', linkedin: 'https://www.linkedin.com/in/andr%C3%A9-lima-6817a9211', instagram: '', // TODO: cole aqui os links do LinkedIn e do Instagram
   github: 'https://github.com/AndreMouraL', lattes: 'http://lattes.cnpq.br/7829675817495781',
   place: 'São Luís · Maranhão · Brasil',
   about: ['Cientista e engenheiro de dados com mais de 5 anos de atuação em Ciência de Dados, bacharel em Ciência e Tecnologia pela UFMA e estudante de Engenharia da Computação. Atuo com análise de dados, estatística, machine learning e engenharia de dados, criando soluções orientadas por dados e geração de insights.',
